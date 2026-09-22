@@ -1,26 +1,30 @@
+# Environment
 .env
-*.db
+*.env
+
+# Python
 __pycache__/
 *.py[cod]
+*.db
 
 # Virtual environments
 .venv/
 venv/
 venv310/
 env/
-farming-assistant/backend/venv310/
+backend/venv310/
 
-# Node / frontend
+# Node
 node_modules/
 
-# OS / misc
+# OS / IDE
 .DS_Store
 .vscode/
 
 # Project-specific
 uploads/
-farming-assistant/backend/uploads/
-farming-assistant/backend/farmers.db
+backend/uploads/
+backend/farmers.db
 
 # Models
 *.h5
