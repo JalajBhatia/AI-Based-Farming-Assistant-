@@ -1,0 +1,11 @@
+{
+  "wheat": { "quintal_per_acre_low": 12, "quintal_per_acre_high": 18 },
+  "rice": { "quintal_per_acre_low": 14, "quintal_per_acre_high": 22 },
+  "maize": { "quintal_per_acre_low": 16, "quintal_per_acre_high": 24 },
+  "tomato": { "quintal_per_acre_low": 80, "quintal_per_acre_high": 140 },
+  "onion": { "quintal_per_acre_low": 50, "quintal_per_acre_high": 90 },
+  "pulses": { "quintal_per_acre_low": 5, "quintal_per_acre_high": 10 },
+  "sugarcane": { "ton_per_acre_low": 28, "ton_per_acre_high": 38 },
+  "groundnut": { "quintal_per_acre_low": 8, "quintal_per_acre_high": 14 },
+  "other": { "quintal_per_acre_low": 10, "quintal_per_acre_high": 18 }
+}

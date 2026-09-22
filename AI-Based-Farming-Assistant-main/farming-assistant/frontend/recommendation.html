@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Crop Recommendation</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/farmer-theme.css" />
+  <link rel="stylesheet" href="css/visual-saas.css" />
+  <link rel="stylesheet" href="css/design-system-3d.css" />
+  <link rel="stylesheet" href="css/force-antigravity.css" />
+  <link rel="stylesheet" href="css/chatbot-widget.css" />
+  <link rel="stylesheet" href="css/recommendation.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <button class="theme-toggle-fab" aria-label="Toggle Theme">🌙</button>
+
+  <div class="page-container">
+    <header class="app-header">
+      <a href="dashboard.html" class="brand" style="color: inherit; text-decoration: none">
+        <span class="logo">🌱</span>
+        <span>Smart Recommendation</span>
+      </a>
+      <button type="button" class="btn btn--icon icon-btn" data-lang-btn>🏳️</button>
+    </header>
+    
+    <div class="page-title-bar section">
+      <h1><span aria-hidden="true">🌱</span> Smart Crop Recommendation</h1>
+      <p class="subtitle">AI-powered crop selection with profit prediction</p>
+    </div>
+    
+    <main class="page-main-tight section">
+      <!-- Input Form -->
+      <div class="glass-card section recommendation-input-card">
+        <h2 class="card-title">
+          <span class="title-icon">📋</span>
+          <span>Enter Farm Conditions</span>
+        </h2>
+
+        <div class="input-grid">
+          <div class="input-group">
+            <label class="input-label">
+              <span class="label-icon">🏜️</span>
+              <span class="label-text">Soil Type</span>
+            </label>
+            <select class="input-field" id="soil-type">
+              <option value="">Select soil type</option>
+              <option value="sandy">Sandy</option>
+              <option value="loamy">Loamy</option>
+              <option value="clay">Clay</option>
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label class="input-label">
+              <span class="label-icon">🌦️</span>
+              <span class="label-text">Season</span>
+            </label>
+            <select class="input-field" id="season">
+              <option value="">Select season</option>
+              <option value="kharif">Kharif (Monsoon)</option>
+              <option value="rabi">Rabi (Winter)</option>
+              <option value="zaid">Zaid (Summer)</option>
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label class="input-label">
+              <span class="label-icon">📍</span>
+              <span class="label-text">State</span>
+            </label>
+            <input 
+              type="text" 
+              class="input-field" 
+              id="state" 
+              placeholder="e.g., Punjab"
+            />
+          </div>
+
+          <div class="input-group">
+            <label class="input-label">
+              <span class="label-icon">🏘️</span>
+              <span class="label-text">District</span>
+            </label>
+            <input 
+              type="text" 
+              class="input-field" 
+              id="district" 
+              placeholder="e.g., Ludhiana"
+            />
+          </div>
+
+          <div class="input-group full-width">
+            <label class="input-label">
+              <span class="label-icon">💧</span>
+              <span class="label-text">Water Availability</span>
+            </label>
+            <select class="input-field" id="water-availability">
+              <option value="">Select water availability</option>
+              <option value="low">Low (Rain-fed)</option>
+              <option value="medium">Medium (Canal/Well)</option>
+              <option value="high">High (Tube-well/River)</option>
+            </select>
+          </div>
+        </div>
+
+        <button 
+          type="button" 
+          class="btn btn-primary btn--block recommendation-btn" 
+          id="btn-recommend"
+        >
+          <span>🧠</span>
+          <span>Get AI Recommendation</span>
+        </button>
+      </div>
+
+      <!-- Results Section -->
+      <div id="recommendation-results" class="section" style="display: none;">
+        <!-- AI Advice Card -->
+        <div class="ai-advice-card" id="ai-advice-card">
+          <div class="advice-header">
+            <span class="advice-icon">🧠</span>
+            <span class="advice-title">AI Recommendation</span>
+          </div>
+          <div class="advice-content" id="ai-advice-content"></div>
+        </div>
+
+        <!-- Top Crops Section -->
+        <div class="top-crops-section">
+          <h2 class="section-title">
+            <span>🌾</span>
+            <span>Recommended Crops</span>
+          </h2>
+          <div class="crops-grid" id="crops-grid"></div>
+        </div>
+
+        <!-- Profit Comparison Chart -->
+        <div class="chart-section">
+          <h2 class="section-title">
+            <span>📊</span>
+            <span>Profit Comparison</span>
+          </h2>
+          <div class="chart-wrapper">
+            <canvas id="profit-chart"></canvas>
+          </div>
+        </div>
+
+        <!-- Detailed Comparison Table -->
+        <div class="comparison-section">
+          <h2 class="section-title">
+            <span>📋</span>
+            <span>Detailed Comparison</span>
+          </h2>
+          <div class="comparison-table-wrapper">
+            <table class="comparison-table" id="comparison-table">
+              <thead>
+                <tr>
+                  <th>Crop</th>
+                  <th>Yield (q/acre)</th>
+                  <th>Price (₹/q)</th>
+                  <th>Revenue (₹)</th>
+                  <th>Cost (₹)</th>
+                  <th>Profit (₹)</th>
+                  <th>ROI (%)</th>
+                </tr>
+              </thead>
+              <tbody id="comparison-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <nav class="bottom-nav">
+      <a href="dashboard.html"><span class="ni">🏠</span><span data-i18n="bottom_home"></span></a>
+      <a href="disease.html"><span class="ni">📸</span><span data-i18n="bottom_disease"></span></a>
+      <a href="weather.html"><span class="ni">🌦️</span><span data-i18n="bottom_weather"></span></a>
+      <a href="finance.html"><span class="ni">💰</span><span data-i18n="bottom_finance"></span></a>
+      <a href="profile.html"><span class="ni">👤</span><span data-i18n="bottom_profile"></span></a>
+    </nav>
+  </div>
+
+  <script src="js/theme.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/voice-assistant.js"></script>
+  <script src="js/chatbot-widget.js"></script>
+  <script src="js/recommendation.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      if (!(await guardRoutes())) return;
+      applyTranslations(document);
+      
+      if (typeof window.initRecommendation === "function") {
+        window.initRecommendation();
+      }
+    });
+  </script>
+  <script src="js/translations.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

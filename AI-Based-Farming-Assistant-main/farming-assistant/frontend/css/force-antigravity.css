@@ -1,0 +1,218 @@
+/**
+ * FORCE ANTI-GRAVITY SYSTEM 🌌 - Light/Dark Theme Edition
+ * Extreme visual overrides mapped perfectly to a global .dark class.
+ */
+
+:root {
+  /* LIGHT MODE VARIABLES */
+  --fa-bg-gradient: radial-gradient(circle at 75% 50%, #dcfce7 0%, #e2e8f0 80%);
+  --fa-orb-1: rgba(16, 185, 129, 0.15);
+  --fa-orb-2: rgba(56, 189, 248, 0.1);
+  --fa-center-orb: radial-gradient(circle, rgba(16, 185, 129, 0.2) 0%, transparent 70%);
+  --fa-card-bg: rgba(255, 255, 255, 0.45);
+  --fa-card-border: rgba(255, 255, 255, 0.8);
+  --fa-text-main: #0f172a;
+  --fa-text-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  --fa-text-muted: #334155;
+  --fa-input-bg: rgba(255, 255, 255, 0.6);
+  --fa-shadow-base: 0 15px 40px rgba(0,0,0,0.1), inset 0 2px 10px rgba(255,255,255,0.8);
+  --fa-shadow-huge: 0 40px 100px rgba(0, 0, 0, 0.25);
+  --fa-nav-shadow: 0 10px 40px rgba(0,0,0,0.05);
+}
+
+body.dark {
+  /* DARK MODE VARIABLES */
+  --fa-bg-gradient: radial-gradient(circle at 75% 50%, #022c22 0%, #020617 80%);
+  --fa-orb-1: rgba(16, 185, 129, 0.25);
+  --fa-orb-2: rgba(56, 189, 248, 0.15);
+  --fa-center-orb: radial-gradient(circle, rgba(16, 185, 129, 0.4) 0%, transparent 70%);
+  --fa-card-bg: rgba(10, 15, 25, 0.4);
+  --fa-card-border: rgba(255, 255, 255, 0.15);
+  --fa-text-main: #f8fafc;
+  --fa-text-shadow: 0 2px 10px rgba(255,255,255,0.2);
+  --fa-text-muted: #cbd5e1;
+  --fa-input-bg: rgba(0, 0, 0, 0.3);
+  --fa-shadow-base: 0 15px 40px rgba(0,0,0,0.5), inset 0 2px 10px rgba(255,255,255,0.05);
+  --fa-shadow-huge: 0 40px 100px rgba(0, 0, 0, 0.7);
+  --fa-nav-shadow: 0 10px 40px rgba(0,0,0,0.5);
+}
+
+/* 1. AGGRESSIVE BACKGROUND */
+body {
+  background: var(--fa-bg-gradient) !important;
+  color: var(--fa-text-main) !important;
+  overflow-x: hidden;
+  animation: pageFadeIn 0.8s ease-out forwards;
+  transition: background 0.4s ease, color 0.4s ease !important;
+}
+
+@keyframes pageFadeIn {
+  from { opacity: 0; filter: blur(10px); }
+  to { opacity: 1; filter: blur(0); }
+}
+
+/* Layer 1: Background, Layer 2: Glow */
+body::before {
+  content: "" !important;
+  position: fixed !important;
+  top: -50% !important;
+  left: -50% !important;
+  width: 200vw !important;
+  height: 200vh !important;
+  background: 
+    radial-gradient(circle at 20% 30%, var(--fa-orb-1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, var(--fa-orb-2) 0%, transparent 50%) !important;
+  animation: bg-drift 30s infinite alternate linear !important;
+  z-index: -10 !important;
+  pointer-events: none !important;
+  transition: background 0.4s ease !important;
+}
+
+/* Extra blurred glowing circle directly behind forms */
+.page-container::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 600px;
+  height: 600px;
+  background: var(--fa-center-orb) !important;
+  transform: translate(-50%, -50%);
+  filter: blur(80px);
+  z-index: -5;
+  pointer-events: none;
+  transition: background 0.4s ease !important;
+}
+
+@keyframes bg-drift {
+  0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  50% { transform: translate(5%, -5%) scale(1.2) rotate(5deg); filter: hue-rotate(15deg); }
+  100% { transform: translate(-5%, 5%) scale(0.9) rotate(-5deg); filter: hue-rotate(-15deg); }
+}
+
+/* 2. GLASS CARD OVERRIDE - Layer 3: Card */
+.glass-card, .card, .fin-card, .q-card {
+  background: var(--fa-card-bg) !important;
+  backdrop-filter: blur(40px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(40px) saturate(150%) !important;
+  border: 1px solid var(--fa-card-border) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.4) !important;
+  border-radius: 24px !important;
+  box-shadow: var(--fa-shadow-base) !important;
+  transform-style: preserve-3d !important;
+  perspective: 2000px !important;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease !important;
+  color: var(--fa-text-main) !important;
+}
+
+/* Base Headings & Text Fixes */
+.glass-card h1, .glass-card h2, .glass-card h3,
+.card h1, .card h2, .card h3, body h1, body h2, body h3 {
+  color: var(--fa-text-main) !important;
+  text-shadow: var(--fa-text-shadow) !important;
+  transition: color 0.4s ease !important;
+}
+
+.glass-card p, .card p, .tag-hi, .tag-en, .muted-small, body p, span {
+  color: var(--fa-text-muted) !important;
+  transition: color 0.4s ease !important;
+}
+
+/* REQUIRED: HOVER MASSIVE OFF-SCREEN FLY */
+.glass-card:hover, .card:hover, .fin-card:hover, .q-card:hover {
+  transform: translateY(-20px) scale(1.05) !important;
+  box-shadow: var(--fa-shadow-huge) !important;
+  border-color: #34d399 !important;
+  z-index: 999 !important;
+}
+
+/* 3. BUTTONS (Consistent Vivid Theme) */
+.btn-primary, .btn--primary, .btn-green {
+  background: linear-gradient(135deg, #10b981 0%, #047857 100%) !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 100px !important;
+  padding: 14px 28px !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 2px !important;
+  box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4), inset 0 2px 5px rgba(255,255,255,0.4) !important;
+  transition: all 0.3s ease !important;
+}
+
+.btn-primary:hover, .btn--primary:hover, .btn-green:hover {
+  transform: translateY(-8px) scale(1.05) !important;
+  box-shadow: 0 20px 50px rgba(16, 185, 129, 0.8), inset 0 2px 10px rgba(255,255,255,0.6) !important;
+  filter: brightness(1.3) !important;
+}
+
+.btn-primary:active, .btn--primary:active, .btn-green:active {
+  transform: scale(0.95) !important;
+}
+
+/* 4. INPUT FIELDS */
+.input-field, .auth-input, input[type="text"], input[type="password"], input[type="number"], select {
+  background: var(--fa-input-bg) !important;
+  border: 1px solid var(--fa-card-border) !important;
+  color: var(--fa-text-main) !important;
+  border-radius: 12px !important;
+  padding: 16px 20px !important;
+  transition: all 0.3s ease, background 0.4s ease !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+.input-field:focus, .auth-input:focus, input:focus, select:focus {
+  outline: none !important;
+  transform: translateY(-5px) !important;
+  border-color: #34d399 !important;
+  box-shadow: 0 0 0 6px rgba(16, 185, 129, 0.3), 0 10px 30px rgba(16, 185, 129, 0.5) !important;
+}
+
+/* 5. THEME TOGGLE FLOATING BUTTON */
+.theme-toggle-fab {
+  position: fixed !important;
+  top: 20px !important;
+  right: 20px !important;
+  width: 50px !important;
+  height: 50px !important;
+  border-radius: 50% !important;
+  background: var(--fa-card-bg) !important;
+  backdrop-filter: blur(20px) !important;
+  border: 1px solid var(--fa-card-border) !important;
+  box-shadow: var(--fa-nav-shadow) !important;
+  z-index: 10000 !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 24px !important;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+
+.theme-toggle-fab:hover {
+  transform: scale(1.15) rotate(15deg) !important;
+  box-shadow: var(--fa-shadow-huge) !important;
+  border-color: #34d399 !important;
+}
+.theme-toggle-fab:active {
+  transform: scale(0.9) !important;
+}
+
+/* 6. LEFT SIDE UPGRADE */
+.auth-illustration {
+  position: relative;
+  z-index: 5;
+  animation: floatIllustration 6s ease-in-out infinite alternate;
+}
+@keyframes floatIllustration {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-15px); }
+}
+.auth-illustration img {
+  filter: drop-shadow(0 0 40px rgba(16, 185, 129, 0.9));
+  animation: pulseLogo 3s infinite alternate ease-in-out;
+}
+@keyframes pulseLogo {
+  from { filter: drop-shadow(0 0 40px rgba(16, 185, 129, 0.9)) scale(1); }
+  to { filter: drop-shadow(0 0 80px rgba(16, 185, 129, 1)) scale(1.05); }
+}

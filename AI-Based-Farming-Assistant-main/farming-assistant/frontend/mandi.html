@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="mandi">Mandi Prices</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/farmer-theme.css" />
+  <link rel="stylesheet" href="css/visual-saas.css" />
+  <link rel="stylesheet" href="css/design-system-3d.css" />
+  <link rel="stylesheet" href="css/force-antigravity.css" />
+  <link rel="stylesheet" href="css/chatbot-widget.css" />
+  <link rel="stylesheet" href="css/mandi-enhanced.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <button class="theme-toggle-fab" aria-label="Toggle Theme">🌙</button>
+
+  <div class="page-container">
+    <header class="app-header">
+      <a href="dashboard.html" class="brand" style="color: inherit; text-decoration: none">
+        <span class="logo">🛒</span>
+        <span data-i18n="mandi">Mandi</span>
+      </a>
+      <button type="button" class="btn btn--icon icon-btn" data-lang-btn>🏳️</button>
+    </header>
+    
+    <div class="page-title-bar section">
+      <h1><span aria-hidden="true">🛒</span> <span data-i18n="mandi">Mandi Prices</span></h1>
+    </div>
+    
+    <main class="page-main-tight section">
+      <!-- Input Form -->
+      <div class="glass-card section mandi-input-card">
+        <div class="input-group">
+          <label class="input-label">
+            <span class="label-icon">🌾</span>
+            <span class="label-text">Select Crop</span>
+          </label>
+          <div class="crop-input-wrapper">
+            <input 
+              type="text" 
+              class="input-field" 
+              id="mcrop" 
+              placeholder="Type to search crops..." 
+              autocomplete="off"
+            />
+            <div class="crop-suggestions" id="crop-suggestions" style="display:none;"></div>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">
+            <span class="label-icon">📍</span>
+            <span class="label-text">State (English)</span>
+          </label>
+          <input 
+            type="text" 
+            class="input-field" 
+            id="mstate" 
+            placeholder="e.g., Punjab, Haryana" 
+          />
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">
+            <span class="label-icon">🏘️</span>
+            <span class="label-text">District (Optional)</span>
+          </label>
+          <input 
+            type="text" 
+            class="input-field" 
+            id="mdistrict" 
+            placeholder="e.g., Ludhiana" 
+          />
+        </div>
+
+        <button 
+          type="button" 
+          class="btn btn-secondary btn--block" 
+          id="btn-use-location"
+          style="margin-bottom: var(--space-2)"
+        >
+          <span>🌍</span>
+          <span>Use My Location</span>
+        </button>
+
+        <button 
+          type="button" 
+          class="btn btn-primary btn--block" 
+          id="btn-mandi"
+        >
+          <span>🔍</span>
+          <span>Show Prices</span>
+        </button>
+      </div>
+
+      <!-- Results -->
+      <div id="mandi-out" class="section"></div>
+
+      <!-- Chart -->
+      <div class="chart-container section" style="display: none;" id="chart-container">
+        <h3 class="section-title">📈 Price Trends</h3>
+        <div class="chart-wrapper">
+          <canvas id="mandi-chart"></canvas>
+        </div>
+      </div>
+    </main>
+
+    <nav class="bottom-nav">
+      <a href="dashboard.html"><span class="ni">🏠</span><span data-i18n="bottom_home"></span></a>
+      <a href="disease.html"><span class="ni">📸</span><span data-i18n="bottom_disease"></span></a>
+      <a href="weather.html"><span class="ni">🌦️</span><span data-i18n="bottom_weather"></span></a>
+      <a href="finance.html"><span class="ni">💰</span><span data-i18n="bottom_finance"></span></a>
+      <a href="profile.html"><span class="ni">👤</span><span data-i18n="bottom_profile"></span></a>
+    </nav>
+  </div>
+
+  <script src="js/theme.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/voice-assistant.js"></script>
+  <script src="js/chatbot-widget.js"></script>
+  <script src="js/mandi-prices.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      if (!(await guardRoutes())) return;
+      applyTranslations(document);
+      
+      if (typeof window.initMandiPrices === "function") {
+        window.initMandiPrices();
+      }
+    });
+  </script>
+  <script src="js/translations.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

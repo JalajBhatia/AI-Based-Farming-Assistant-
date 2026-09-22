@@ -1,0 +1,31 @@
+{
+  "default": [
+    {"month": 1, "activity": "Soil prep", "description_hindi": "जुताई और खाद मिलाएं", "description_english": "Till and mix compost", "icon": "🚜"},
+    {"month": 2, "activity": "Irrigation check", "description_hindi": "सिंचाई स्रोत ठीक करें", "description_english": "Check irrigation", "icon": "💧"},
+    {"month": 3, "activity": "Sowing window", "description_hindi": "बुवाई की तैयारी", "description_english": "Prepare sowing", "icon": "🌱"},
+    {"month": 4, "activity": "Pest scouting", "description_hindi": "कीट देखभाल", "description_english": "Scout for pests", "icon": "🔍"},
+    {"month": 5, "activity": "Top dressing", "description_hindi": "दोबारा खाद", "description_english": "Side dress fertilizer", "icon": "🌿"},
+    {"month": 6, "activity": "Weed control", "description_hindi": "खरपतवार नियंत्रण", "description_english": "Weed control", "icon": "🧹"},
+    {"month": 7, "activity": "Disease watch", "description_hindi": "फफूंद रोकथाम", "description_english": "Fungal disease watch", "icon": "🛡️"},
+    {"month": 8, "activity": "Water management", "description_hindi": "पानी का संतुलन", "description_english": "Balance irrigation", "icon": "💧"},
+    {"month": 9, "activity": "Harvest prep", "description_hindi": "कटाई की तैयारी", "description_english": "Prepare harvest", "icon": "🌾"},
+    {"month": 10, "activity": "Harvest", "description_hindi": "कटाई", "description_english": "Harvest", "icon": "✂️"},
+    {"month": 11, "activity": "Storage", "description_hindi": "भंडारण", "description_english": "Dry and store", "icon": "📦"},
+    {"month": 12, "activity": "Plan next season", "description_hindi": "अगली फसल योजना", "description_english": "Plan next crop", "icon": "📋"}
+  ],
+  "wheat": [
+    {"month": 10, "activity": "खेत तैयारी", "description_hindi": "जुताई व खाद", "description_english": "Land prep & manure", "icon": "🚜"},
+    {"month": 11, "activity": "बुवाई", "description_hindi": "गेहूं बोना", "description_english": "Sow wheat", "icon": "🌱"},
+    {"month": 12, "activity": "पहली सिंचाई", "description_hindi": "जरूरत अनुसार पानी", "description_english": "First irrigation if dry", "icon": "💧"},
+    {"month": 1, "activity": "खरपतवार", "description_hindi": "नियंत्रण", "description_english": "Weed control", "icon": "🧹"},
+    {"month": 2, "activity": "यूरिया", "description_hindi": "पहला छिड़काव", "description_english": "First urea top-dress", "icon": "🌿"},
+    {"month": 3, "activity": "रोग रोकथाम", "description_hindi": "चूहा/फफूंद देखें", "description_english": "Rust & pest watch", "icon": "🛡️"},
+    {"month": 4, "activity": "कटाई", "description_hindi": "पका होने पर काटें", "description_english": "Harvest when mature", "icon": "🌾"}
+  ],
+  "tomato": [
+    {"month": 6, "activity": "नर्सरी", "description_hindi": "पौध तैयार करें", "description_english": "Raise seedlings", "icon": "🌱"},
+    {"month": 7, "activity": "रोपाई", "description_hindi": "खेत में लगाएं", "description_english": "Transplant", "icon": "🍅"},
+    {"month": 8, "activity": "छिड़काव", "description_hindi": "कीट-रोग नियंत्रण", "description_english": "Spray schedule", "icon": "🛡️"},
+    {"month": 9, "activity": "तुड़ाई", "description_hindi": "लाल होने पर तोड़ें", "description_english": "Pick when red", "icon": "✂️"}
+  ]
+}

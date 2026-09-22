@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="profile">Profile</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/farmer-theme.css" />
+  <link rel="stylesheet" href="css/visual-saas.css" />
+  <link rel="stylesheet" href="css/design-system-3d.css" />
+  <link rel="stylesheet" href="css/force-antigravity.css" />
+</head>
+<body>
+  <button class="theme-toggle-fab" aria-label="Toggle Theme">🌙</button>
+
+  <div class="page-container">
+    <header class="app-header">
+      <a href="dashboard.html" class="brand" style="color: inherit; text-decoration: none"><span class="logo">👤</span><span data-i18n="profile"></span></a>
+      <button type="button" class="btn btn--icon icon-btn" data-lang-btn>🏳️</button>
+    </header>
+    <div class="page-title-bar section"><h1><span aria-hidden="true">👤</span> <span data-i18n="profile">Profile</span></h1></div>
+    <main class="page-main-tight section" style="max-width: 480px">
+      <div id="profile-body" class="glass-card section" style="font-size: 20px; line-height: 1.6"></div>
+      <div class="glass-card section" style="padding: var(--space-3)">
+        <p style="font-weight: 700">UI mode</p>
+        <button type="button" class="btn btn-primary btn--block" id="btn-ui-smart" style="margin-bottom: var(--space-2)">
+          <span>📱</span><span>Smart mode</span>
+        </button>
+        <button type="button" class="btn btn-secondary btn--block" id="btn-ui-simple">
+          <span>🌿</span><span>Simple mode</span>
+        </button>
+      </div>
+      <button type="button" class="btn btn--danger btn--block section" style="margin-top: var(--space-3)" id="btn-logout">
+        <span>🚪</span><span data-i18n="logout">Logout</span>
+      </button>
+    </main>
+    <nav class="bottom-nav">
+      <a href="dashboard.html"><span class="ni">🏠</span><span data-i18n="bottom_home"></span></a>
+      <a href="disease.html"><span class="ni">📸</span><span data-i18n="bottom_disease"></span></a>
+      <a href="weather.html"><span class="ni">🌦️</span><span data-i18n="bottom_weather"></span></a>
+      <a href="finance.html"><span class="ni">💰</span><span data-i18n="bottom_finance"></span></a>
+      <a href="profile.html" class="active"><span class="ni">👤</span><span data-i18n="bottom_profile"></span></a>
+    </nav>
+  </div>
+  <script src="js/theme.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/voice-assistant.js"></script>
+  <script src="js/profile.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      if (!(await guardRoutes())) return;
+      applyTranslations(document);
+      
+      // Initialize profile management
+      if (typeof window.initProfileManagement === "function") {
+        await window.initProfileManagement();
+      }
+      async function putUi(mode) {
+        try {
+          const res = await window.apiJson("/api/farmer/profile", {
+            method: "PUT",
+            headers: getAuthHeaders(),
+            body: JSON.stringify({ ui_mode: mode }),
+            timeoutMs: 7000,
+          });
+          const j = res.data || {};
+          if (!res.ok || j.success === false) {
+            window.showToast?.("error", j.error || res.error || t("api_error"));
+            return;
+          }
+          document.documentElement.setAttribute("data-ui-mode", mode);
+          localStorage.setItem("uiMode", mode);
+          window.showToast?.("success", typeof t === "function" ? t("save") : "Saved");
+        } catch (e) {
+          window.showToast?.("error", t("api_error"));
+        }
+      }
+
+      document.getElementById("btn-ui-smart")?.addEventListener("click", () => putUi("smart"));
+      document.getElementById("btn-ui-simple")?.addEventListener("click", () => putUi("simple"));
+      document.getElementById("btn-logout")?.addEventListener("click", async () => {
+        try {
+          await window.apiJson("/api/auth/logout", {
+            method: "POST",
+            headers: getAuthHeaders(),
+            timeoutMs: 6500,
+          });
+        } catch (e) {}
+        window.setAuthToken(null);
+        localStorage.removeItem("profileComplete");
+        localStorage.removeItem("farmerProfile");
+        window.showToast?.("success", t("logged_out"));
+        window.location.href = "login.html";
+      });
+    });
+  </script>
+  <script src="js/translations.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

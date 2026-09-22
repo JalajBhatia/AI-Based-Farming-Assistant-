@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="gov_schemes">Schemes</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/farmer-theme.css" />
+  <link rel="stylesheet" href="css/visual-saas.css" />
+  <link rel="stylesheet" href="css/design-system-3d.css" />
+  <link rel="stylesheet" href="css/force-antigravity.css" />
+</head>
+<body>
+  <button class="theme-toggle-fab" aria-label="Toggle Theme">🌙</button>
+
+  <div class="page-container">
+    <header class="app-header">
+      <a href="dashboard.html" class="brand" style="color: inherit; text-decoration: none"><span class="logo">🏛️</span><span data-i18n="gov_schemes"></span></a>
+      <button type="button" class="btn btn--icon icon-btn" data-lang-btn>🏳️</button>
+    </header>
+    <div class="page-title-bar section"><h1><span aria-hidden="true">🏛️</span> <span data-i18n="gov_schemes">Schemes</span></h1></div>
+    <main class="page-main-tight section">
+      <div class="glass-card section">
+        <label data-i18n="subsidy_state"></label>
+        <input class="input-field" id="s-state" placeholder="Uttar Pradesh" />
+        <label data-i18n="subsidy_crop"></label>
+        <input class="input-field" id="s-crop" placeholder="wheat" />
+        <label data-i18n="subsidy_cat"></label>
+        <select class="big-select input-field" id="s-cat">
+          <option value="" data-i18n="small"></option>
+          <option value="Small">Small</option>
+          <option value="Marginal">Marginal</option>
+          <option value="Large">Large</option>
+        </select>
+        <button type="button" class="btn btn-primary btn--block" style="margin-top: var(--space-2)" id="btn-sub" data-i18n="search_schemes"></button>
+      </div>
+      <div id="sub-out" class="section" style="margin-top: var(--space-2)"></div>
+    </main>
+    <nav class="bottom-nav">
+      <a href="dashboard.html"><span class="ni">🏠</span><span data-i18n="bottom_home"></span></a>
+      <a href="disease.html"><span class="ni">📸</span><span data-i18n="bottom_disease"></span></a>
+      <a href="weather.html"><span class="ni">🌦️</span><span data-i18n="bottom_weather"></span></a>
+      <a href="finance.html"><span class="ni">💰</span><span data-i18n="bottom_finance"></span></a>
+      <a href="profile.html"><span class="ni">👤</span><span data-i18n="bottom_profile"></span></a>
+    </nav>
+  </div>
+  <script src="js/theme.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/voice-assistant.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      if (!(await guardRoutes())) return;
+      applyTranslations(document);
+      const btnSub = document.getElementById("btn-sub");
+      btnSub?.addEventListener("click", async () => {
+        const state = (document.getElementById("s-state").value || "").trim();
+        const crop = (document.getElementById("s-crop").value || "").trim();
+        if (!state) {
+          window.showToast?.("warning", "Enter state");
+          return;
+        }
+        const cat = document.getElementById("s-cat").value;
+        const q =
+          "?state=" +
+          encodeURIComponent(state) +
+          "&crop=" +
+          encodeURIComponent(crop) +
+          "&category=" +
+          encodeURIComponent(cat);
+        const el = document.getElementById("sub-out");
+        try {
+          window.setButtonBusy?.(btnSub, true, typeof t === "function" ? t("loading") : "...");
+          const res = await window.apiJson("/api/subsidies" + q, { timeoutMs: 7000 });
+          const data = res.data || {};
+          if (!res.ok || data.success === false || !Array.isArray(data.schemes)) {
+            if (el) el.textContent = data.error || res.error || t("api_error");
+            window.showToast?.("error", data.error || res.error || t("api_error"));
+            return;
+          }
+          window.showToast?.("success", typeof t === "function" ? t("save") : "OK");
+          el.innerHTML = data.schemes
+            .map(
+              (s) =>
+                "<div class=\"card glass-card\" style=\"margin-bottom:12px\"><h3>" +
+                (s.name_hi || s.name) +
+                "</h3><p>" +
+                (s.benefit_hi || s.benefit) +
+                "</p><p><small>" +
+                (s.how_to_apply_hi || s.how_to_apply) +
+                "</small></p></div>"
+            )
+            .join("");
+        } catch (e) {
+          if (el) el.textContent = t("api_error");
+          window.showToast?.("error", t("api_error"));
+        } finally {
+          window.setButtonBusy?.(btnSub, false);
+        }
+      });
+    });
+  </script>
+  <script src="js/translations.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crop Disease</title>
+
+  <!-- USE SAME CSS AS DASHBOARD -->
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/farmer-theme.css" />
+  <link rel="stylesheet" href="css/visual-saas.css" />
+  <link rel="stylesheet" href="css/design-system-3d.css" />
+
+</head>
+
+<body>
+  <button class="theme-toggle-fab" aria-label="Toggle Theme">🌙</button>
+<div class="page-container">
+
+  <!-- HEADER -->
+  <header class="app-header">
+    <a href="dashboard.html" class="brand">
+      <span class="logo">🌾</span>
+      <span>FarmSaathi</span>
+    </a>
+  </header>
+
+  <!-- MAIN -->
+  <main class="page-main section" style="max-width:600px; margin:auto;">
+
+    <!-- TITLE -->
+    <div class="page-title-bar">
+      <h1>🌿 Crop Disease Detection</h1>
+      <p style="opacity:0.7;">Upload crop image and get AI prediction</p>
+    </div>
+
+    <!-- CARD -->
+    <div class="card glass-card">
+
+      <!-- UPLOAD -->
+      <label class="input-field" style="display:block; cursor:pointer;">
+        <input type="file" id="imageInput" hidden />
+        <span id="uploadText">📸 Upload crop image</span>
+      </label>
+
+      <!-- PREVIEW -->
+      <img id="previewImage"
+           class="hidden"
+           style="width:100%; border-radius:12px; margin-top:10px;" />
+
+      <!-- BUTTON -->
+      <button id="predictBtn"
+              class="btn btn-primary"
+              style="margin-top:15px;">
+        🔍 Analyze Crop
+      </button>
+
+      <!-- RESULT -->
+      <div id="resultBox" class="hidden" style="margin-top:20px;">
+
+        <h2 id="diseaseName"></h2>
+
+        <!-- PROGRESS -->
+        <div style="background:#ddd; height:10px; border-radius:10px;">
+          <div id="confidenceBar"
+               style="height:100%; width:0%; background:#22c55e; border-radius:10px;">
+          </div>
+        </div>
+
+        <p id="confidenceText" style="margin-top:10px;"></p>
+
+        <!-- TIPS -->
+        <div id="tipsBox" class="hidden">
+
+          <div class="card" style="margin-top:15px;">
+            <h3>🧪 Treatment</h3>
+            <p id="treatmentText"></p>
+          </div>
+
+          <div class="card" style="margin-top:10px;">
+            <h3>🛡 Prevention</h3>
+            <p id="preventionText"></p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+</div>
+
+<!-- JS (KEEP SAME SYSTEM) -->
+<script src="js/theme.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/app.js"></script>
+<script src="js/disease-detector.js"></script>
+
+</body>
+</html>

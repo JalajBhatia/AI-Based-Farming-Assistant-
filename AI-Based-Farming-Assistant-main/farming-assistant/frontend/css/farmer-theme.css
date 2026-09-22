@@ -1,0 +1,78 @@
+@import url("visual-saas.css");
+@import url("design-system-3d.css");
+
+/* Extra contrast + tap targets */
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--color-primary-light);
+  outline-offset: 3px;
+}
+
+input,
+select {
+  font-family: inherit;
+  font-size: var(--font-size-lg);
+}
+
+.num-input {
+  width: 100%;
+  max-width: 200px;
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  transition: all 0.3s ease;
+}
+
+.num-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+  outline: none;
+}
+
+details summary {
+  cursor: pointer;
+  font-weight: 700;
+  font-size: var(--font-size-lg);
+  padding: 12px 0;
+  transition: color 0.3s ease;
+}
+
+details summary:hover {
+  color: var(--color-primary);
+}
+
+.result-title {
+  font-size: var(--font-size-2xl);
+  color: var(--color-primary-light);
+}
+
+.result-icon {
+  font-size: 64px;
+  text-align: center;
+  animation: pulse-orange 2s infinite ease-in-out;
+}
+
+.conf-bar-wrap {
+  height: 12px;
+  background: var(--border-light);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.conf-bar {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--color-primary-light), var(--color-primary));
+}
+
+.badge-sev {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--warning), #d97706);
+  color: #fff;
+  font-weight: 700;
+  margin: 8px 0;
+  box-shadow: var(--shadow-sm);
+}

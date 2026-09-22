@@ -1,0 +1,24 @@
+[
+  {
+    "id": "aphid-pb-2026",
+    "title": "Aphid alert — wheat",
+    "title_hi": "गेहूं में एफिड सतर्कता",
+    "state": "Punjab",
+    "district": "",
+    "crop": "wheat",
+    "severity": "medium",
+    "advice_hi": "नीम तेल 2% का छिड़काव या कृषि सलाहकार से संपर्क करें।",
+    "valid_until": "2026-04-30"
+  },
+  {
+    "id": "blight-mh-2026",
+    "title": "Tomato blight risk",
+    "title_hi": "टमाटर झुलसा जोखिम",
+    "state": "Maharashtra",
+    "district": "",
+    "crop": "tomato",
+    "severity": "high",
+    "advice_hi": "बारिश के बाद मैनकोज़ेब छिड़काव विचार करें।",
+    "valid_until": "2026-05-15"
+  }
+]

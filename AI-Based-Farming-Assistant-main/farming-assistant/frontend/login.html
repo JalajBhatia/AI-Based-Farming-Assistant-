@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FarmSaathi - Login</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/farmer-theme.css" />
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <link rel="stylesheet" href="css/visual-saas.css" />
+  <link rel="stylesheet" href="css/design-system-3d.css" />
+  <link rel="stylesheet" href="css/force-antigravity.css" />
+</head>
+<body class="auth-split">
+  <button class="theme-toggle-fab" aria-label="Toggle Theme">🌙</button>
+
+  <div class="page-container page-container--split">
+    <div class="auth-illustration" aria-hidden="true">
+      <img src="assets/logo.svg" width="80" height="80" alt="" />
+      <h1>FarmSaathi</h1>
+      <p class="tag-hi">किसान का डिजिटल साथी</p>
+      <p class="tag-en">Farmer's Digital Companion</p>
+    </div>
+    <main class="auth-panel section glass-card" style="position:relative; z-index: 10;">
+      <div class="brand-stack">
+        <img src="assets/logo.svg" width="56" height="56" alt="FarmSaathi" />
+        <h2 data-i18n="login">Welcome back 👋</h2>
+        <p data-i18n="login_sub">Please enter your details</p>
+      </div>
+      <div id="google-btn-wrap" class="google-wrap"></div>
+      <div class="divider"><span data-i18n="or">या</span></div>
+      <form id="login-form" class="auth-form">
+        <label class="sr-only" for="username_or_email" data-i18n="username">Username</label>
+        <input
+          class="input-field"
+          id="username_or_email"
+          type="text"
+          autocomplete="username"
+          required
+          placeholder="Username या Email"
+          data-i18n-placeholder="username_email_ph"
+        />
+        <label class="sr-only" for="password" data-i18n="password">Password</label>
+        <input
+          class="input-field"
+          id="password"
+          type="password"
+          autocomplete="current-password"
+          required
+          placeholder="Password"
+          data-i18n-placeholder="password_ph"
+        />
+        <div class="form-row">
+          <label><input type="checkbox" id="remember" /> <span data-i18n="remember_me">Remember</span></label>
+          <a href="forgot-password.html" data-i18n="forgot_password">Forgot password?</a>
+        </div>
+        <div id="login-err" class="err" role="alert" hidden></div>
+        <button type="submit" class="btn btn-primary btn--block">
+          <span data-i18n="login_btn">Login</span>
+        </button>
+      </form>
+      <p class="auth-footer">
+        <span data-i18n="no_account">नया account?</span>
+        <a href="register.html" data-i18n="register">Register</a>
+      </p>
+    </main>
+  </div>
+  <script src="js/theme.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      applyTranslations(document);
+      initLoginPage();
+      window.apiJson("/api/config", { timeoutMs: 6000 })
+        .then((res) => {
+          if (!res.ok || !res.data) return;
+          const cfg = res.data;
+          const cid = cfg.google_client_id;
+          const wrap = document.getElementById("google-btn-wrap");
+          if (!cid || !wrap || !window.google?.accounts?.id) {
+            if (wrap) {
+              wrap.innerHTML =
+                '<p class="muted-small">Google Client ID set karein (.env mein GOOGLE_CLIENT_ID)</p>';
+            }
+            return;
+          }
+          google.accounts.id.initialize({
+            client_id: cid,
+            callback: (resp) => window.googleSignIn(resp.credential),
+          });
+          google.accounts.id.renderButton(wrap, { theme: "outline", size: "large", width: 320 });
+        })
+        .catch((err) => console.error(err));
+    });
+  </script>
+  <script src="js/translations.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+{
+  "schemes": [
+    {
+      "id": "pm-kisan",
+      "name": "PM-KISAN",
+      "name_hi": "पीएम किसान सम्मान निधि",
+      "benefit": "₹6000 per year in 3 installments",
+      "benefit_hi": "साल में 6000 रुपये (तीन किस्तों में)",
+      "how_to_apply": "Visit pmkisan.gov.in or nearest CSC with Aadhaar and land records.",
+      "how_to_apply_hi": "pmkisan.gov.in या नज़दीकी CSC पर आधार व जमीन के कागज लें।",
+      "states": [],
+      "crops": [],
+      "categories": ["Small", "Marginal", "Large"]
+    },
+    {
+      "id": "pmfby",
+      "name": "PM Fasal Bima Yojana",
+      "name_hi": "प्रधानमंत्री फसल बीमा योजना",
+      "benefit": "Crop loss compensation as per policy",
+      "benefit_hi": "फसल नुकसान पर बीमा मुआवजा",
+      "how_to_apply": "Enroll through bank or insurer within notified window.",
+      "how_to_apply_hi": "बैंक या बीमा कंपनी के माध्यम से समय पर नाम दर्ज कराएँ।",
+      "states": [],
+      "crops": ["wheat", "rice", "maize", "tomato", "onion"],
+      "categories": []
+    },
+    {
+      "id": "shc",
+      "name": "Soil Health Card",
+      "name_hi": "मृदा स्वास्थ्य कार्ड",
+      "benefit": "Soil test and fertilizer recommendation",
+      "benefit_hi": "मिट्टी जाँच और उर्वरक सलाह",
+      "how_to_apply": "Contact agriculture department / soil testing lab.",
+      "how_to_apply_hi": "कृषि विभाग या मृदा परीक्षण केंद्र से संपर्क करें।",
+      "states": [],
+      "crops": [],
+      "categories": []
+    },
+    {
+      "id": "kcc",
+      "name": "Kisan Credit Card",
+      "name_hi": "किसान क्रेडिट कार्ड",
+      "benefit": "Short-term crop loan at concessional rate",
+      "benefit_hi": "कम ब्याज पर फसल ऋण",
+      "how_to_apply": "Apply at your cooperative bank / commercial bank branch.",
+      "how_to_apply_hi": "सहकारी या व्यावसायिक बैंक शाखा में आवेदन करें।",
+      "states": [],
+      "crops": [],
+      "categories": []
+    },
+    {
+      "id": "up-agri-ex",
+      "name": "UP Agriculture Equipment Subsidy (example)",
+      "name_hi": "यूपी कृषि यंत्र सब्सिडी (उदाहरण)",
+      "benefit": "Up to 50% on selected machinery (varies)",
+      "benefit_hi": "चयनित यंत्रों पर 50% तक (बदल सकता है)",
+      "how_to_apply": "Through state agriculture portal / dealer registration.",
+      "how_to_apply_hi": "राज्य कृषि पोर्टल या डीलर के माध्यम से।",
+      "states": ["Uttar Pradesh"],
+      "crops": [],
+      "categories": []
+    }
+  ]
+}

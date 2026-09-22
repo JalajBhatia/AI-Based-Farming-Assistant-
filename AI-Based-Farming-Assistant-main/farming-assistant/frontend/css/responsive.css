@@ -1,0 +1,47 @@
+/* Mobile-first (375px and up) */
+@media (max-width: 374px) {
+  .farmsaathi-nav .nav-center {
+    display: none;
+  }
+
+  .dash-sidebar {
+    display: none !important;
+  }
+
+  .quick-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .stats-row {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-panel {
+    padding: var(--space-2) var(--space-2) 72px !important;
+  }
+
+  .bottom-nav {
+    font-size: 10px;
+  }
+
+  .bottom-nav .ni {
+    font-size: 22px;
+  }
+
+  .page-title-bar {
+    padding-left: var(--space-2) !important;
+    padding-right: var(--space-2) !important;
+  }
+
+  .welcome-row.card {
+    padding: var(--space-3) var(--space-2) !important;
+  }
+}
+
+@media (min-width: 900px) {
+  .dash-content {
+    padding: var(--space-4) var(--space-3) !important;
+  }
+}

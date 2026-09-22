@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="profile_state">Profile</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/farmer-theme.css" />
+  <style>
+    .wizard-step { text-align: center; color: var(--text-muted); font-weight: 600; }
+    .lang-setup-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-2); padding: var(--space-2); }
+  </style>
+  <link rel="stylesheet" href="css/visual-saas.css" />
+  <link rel="stylesheet" href="css/design-system-3d.css" />
+  <link rel="stylesheet" href="css/force-antigravity.css" />
+</head>
+<body>
+  <button class="theme-toggle-fab" aria-label="Toggle Theme">🌙</button>
+
+  <div class="page-container">
+    <header class="app-header">
+      <div class="brand"><span class="logo">🌾</span><span data-i18n="app_name"></span></div>
+      <button type="button" class="btn btn--icon icon-btn" data-lang-btn title="">🏳️</button>
+    </header>
+    <main style="padding-bottom: 100px">
+      <section id="wizard-1" class="section glass-card" style="padding: var(--space-3); margin-bottom: var(--space-2)">
+        <p class="wizard-step">1/7</p>
+        <h1 class="hero" style="padding: var(--space-2); font-size: 24px; margin: 0" data-i18n="profile_state"></h1>
+        <div style="padding: var(--space-2)">
+          <button type="button" class="btn btn-primary btn--block" id="btn-gps" style="margin-bottom: var(--space-2)">
+            <span style="font-size: 28px">📍</span>
+            <span>GPS से Location लें</span>
+          </button>
+          <p id="geo-status" class="muted-small"></p>
+        </div>
+        <div class="state-grid" id="state-grid"></div>
+      </section>
+      <section id="wizard-2" class="section glass-card" hidden style="padding: var(--space-3); margin-bottom: var(--space-2)">
+        <p class="wizard-step">2/7</p>
+        <h1 class="hero" style="padding: var(--space-2); font-size: 24px; margin: 0" data-i18n="profile_district"></h1>
+        <div style="padding: var(--space-2)">
+          <select class="big-select input-field" id="district-select"></select>
+          <button type="button" class="btn btn-primary btn--block" style="margin-top: var(--space-2)" id="btn-next-district">
+            <span data-i18n="next"></span>
+          </button>
+        </div>
+      </section>
+      <section id="wizard-3" class="section glass-card" hidden style="padding: var(--space-3); margin-bottom: var(--space-2)">
+        <p class="wizard-step">3/7</p>
+        <h1 class="hero" style="padding: var(--space-2); font-size: 24px; margin: 0" data-i18n="profile_crop"></h1>
+        <div class="crop-grid" style="padding: var(--space-2)">
+          <button type="button" class="btn crop-btn" data-crop="wheat"><span style="font-size: 40px">🌾</span><br /><span data-i18n="wheat"></span></button>
+          <button type="button" class="btn crop-btn" data-crop="rice"><span style="font-size: 40px">🍚</span><br /><span data-i18n="rice"></span></button>
+          <button type="button" class="btn crop-btn" data-crop="maize"><span style="font-size: 40px">🌽</span><br /><span data-i18n="maize"></span></button>
+          <button type="button" class="btn crop-btn" data-crop="tomato"><span style="font-size: 40px">🍅</span><br /><span data-i18n="tomato"></span></button>
+          <button type="button" class="btn crop-btn" data-crop="onion"><span style="font-size: 40px">🧅</span><br /><span data-i18n="onion"></span></button>
+          <button type="button" class="btn crop-btn" data-crop="pulses"><span style="font-size: 40px">🫘</span><br /><span data-i18n="pulses"></span></button>
+          <button type="button" class="btn crop-btn" data-crop="sugarcane"><span style="font-size: 40px">🍬</span><br /><span data-i18n="sugarcane"></span></button>
+          <button type="button" class="btn crop-btn" data-crop="groundnut"><span style="font-size: 40px">🥜</span><br /><span data-i18n="groundnut"></span></button>
+          <button type="button" class="btn crop-btn" data-crop="other"><span style="font-size: 40px">➕</span><br /><span data-i18n="other_crop"></span></button>
+        </div>
+      </section>
+      <section id="wizard-4" class="section glass-card" hidden style="padding: var(--space-3); margin-bottom: var(--space-2)">
+        <p class="wizard-step">4/7</p>
+        <h1 class="hero" style="padding: var(--space-2); font-size: 24px; margin: 0" data-i18n="profile_land"></h1>
+        <div class="slider-row" style="padding: var(--space-2)">
+          <input type="range" id="land-acres" min="0" max="20" step="0.5" value="2" />
+          <p style="font-size: 24px; font-weight: 800"><span id="land-val">2</span> <span data-i18n="acres"></span></p>
+          <button type="button" class="btn btn-primary btn--block" id="btn-next-land"><span data-i18n="next"></span></button>
+        </div>
+      </section>
+      <section id="wizard-5" class="section glass-card" hidden style="padding: var(--space-3); margin-bottom: var(--space-2)">
+        <p class="wizard-step">5/7</p>
+        <h1 class="hero" style="padding: var(--space-2); font-size: 24px; margin: 0" data-i18n="profile_irrigation"></h1>
+        <div class="irr-row" style="padding: var(--space-3)">
+          <button type="button" class="btn btn-primary" id="irr-yes"><span style="font-size: 48px; display: block">💧</span><span data-i18n="yes"></span></button>
+          <button type="button" class="btn btn-secondary" id="irr-no"><span style="font-size: 48px; display: block">☀️</span><span data-i18n="no"></span></button>
+        </div>
+      </section>
+      <section id="wizard-6" class="section glass-card" hidden style="padding: var(--space-3); margin-bottom: var(--space-2)">
+        <p class="wizard-step">6/7</p>
+        <h1 class="hero" style="padding: var(--space-2); font-size: 22px; margin: 0">भाषा / Language</h1>
+        <div class="lang-setup-grid" id="lang-setup-grid"></div>
+      </section>
+      <section id="wizard-7" class="section glass-card" hidden style="padding: var(--space-3); margin-bottom: var(--space-2)">
+        <p class="wizard-step">7/7</p>
+        <h1 class="hero" style="padding: var(--space-2); font-size: 22px; margin: 0">UI mode</h1>
+        <div style="padding: var(--space-2); display: flex; flex-direction: column; gap: var(--space-2)">
+          <button type="button" class="btn btn-primary btn--block" id="ui-smart">
+            <span style="font-size: 36px">📱</span><span>Smart Mode — full dashboard</span>
+          </button>
+          <button type="button" class="btn btn-secondary btn--block" id="ui-simple">
+            <span style="font-size: 36px">🌿</span><span>Simple Mode — बड़े बटन</span>
+          </button>
+        </div>
+      </section>
+      <div class="section" style="text-align: center; padding: var(--space-2)">
+        <button type="button" class="btn btn-secondary" id="btn-back"><span data-i18n="back"></span></button>
+      </div>
+    </main>
+  </div>
+  <script src="js/regions-data.js"></script>
+    <script src="js/theme.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+    <script src="js/voice-assistant.js"></script>
+  <script src="js/profile-setup.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      if (!(await guardRoutes())) return;
+      applyTranslations(document);
+      initProfileWizard();
+    });
+  </script>
+  <script src="js/translations.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

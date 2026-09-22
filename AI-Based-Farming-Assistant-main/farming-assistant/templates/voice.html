@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="voice">Voice</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/components.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/farmer-theme.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/visual-saas.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/design-system-3d.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/force-antigravity.css') }}" />
+  <style>
+    .voice-input-container {
+      display: flex;
+      gap: var(--space-2);
+      margin-bottom: var(--space-3);
+      align-items: center;
+    }
+    .voice-input-container input {
+      flex: 1;
+      padding: var(--space-2) var(--space-3);
+      border-radius: 8px;
+      border: 1px solid var(--color-border);
+      font-size: 16px;
+    }
+    .voice-input-container button {
+      padding: var(--space-2) var(--space-3);
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    #voice-send-btn {
+      background: var(--color-primary);
+      color: white;
+    }
+    #voice-btn {
+      background: var(--color-accent);
+      font-size: 20px;
+      min-width: 44px;
+    }
+    #voice-chat-history {
+      margin-top: var(--space-3);
+      text-align: left;
+      max-height: 400px;
+      overflow-y: auto;
+      border-top: 1px solid var(--color-border);
+      padding-top: var(--space-2);
+    }
+    .voice-msg {
+      padding: var(--space-2) var(--space-3);
+      border-radius: 12px;
+      margin-bottom: var(--space-2);
+      word-wrap: break-word;
+    }
+    .user-msg {
+      background: var(--color-primary);
+      color: white;
+      margin-left: auto;
+      max-width: 80%;
+      border-radius: 12px 4px 12px 12px;
+    }
+    .ai-msg {
+      background: var(--color-surface);
+      color: var(--text-primary);
+      margin-right: auto;
+      max-width: 80%;
+      border-radius: 4px 12px 12px 12px;
+      border: 1px solid var(--color-border);
+    }
+  </style>
+</head>
+<body>
+  <select class="global-lang-select input-field" style="position: fixed; top: 20px; left: 20px; z-index: 10000; max-width: 150px; cursor: pointer; padding: 10px 15px; border-radius: 50px;" aria-label="Select Language">
+    <option value="en">English</option>
+  </select>
+
+  <button class="theme-toggle-fab" aria-label="Toggle Theme">🌙</button>
+
+  <div class="page-container">
+    <header class="app-header">
+      <a href="dashboard.html" class="brand" style="color: inherit; text-decoration: none"><span class="logo">🎤</span><span data-i18n="voice"></span></a>
+      <button type="button" class="btn btn--icon icon-btn" data-lang-btn>🏳️</button>
+    </header>
+    <div class="page-title-bar section"><h1><span aria-hidden="true">🎤</span> <span data-i18n="voice">Voice</span></h1></div>
+    <main class="page-main-tight voice-main section glass-card" style="text-align: center; padding: var(--space-4) var(--space-3)">
+      <p style="font-size: 22px; font-weight: 800; margin-top: 0" data-i18n="voice_speak"></p>
+
+      <div class="voice-input-container">
+        <input
+          type="text"
+          id="voice-text-input"
+          placeholder="Ask about farming..."
+        />
+        <button type="button" id="voice-send-btn">Send</button>
+        <button type="button" id="voice-btn">🎤</button>
+      </div>
+
+      <div class="voice-input-container">
+        <input type="file" id="leaf-image-input" accept="image/*" />
+        <button type="button" id="image-send-btn">Upload</button>
+      </div>
+
+      <div id="voice-chat-history"></div>
+    </main>
+    <nav class="bottom-nav">
+      <a href="dashboard.html"><span class="ni">🏠</span><span data-i18n="bottom_home"></span></a>
+      <a href="disease.html"><span class="ni">📸</span><span data-i18n="bottom_disease"></span></a>
+      <a href="weather.html"><span class="ni">🌦️</span><span data-i18n="bottom_weather"></span></a>
+      <a href="finance.html"><span class="ni">💰</span><span data-i18n="bottom_finance"></span></a>
+      <a href="profile.html"><span class="ni">👤</span><span data-i18n="bottom_profile"></span></a>
+    </nav>
+  </div>
+  <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/ui.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/voice-assistant.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/translations.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      if (!(await guardRoutes())) return;
+      applyTranslations(document);
+      initVoiceAssistant();
+    });
+  </script>
+</body>
+</html>

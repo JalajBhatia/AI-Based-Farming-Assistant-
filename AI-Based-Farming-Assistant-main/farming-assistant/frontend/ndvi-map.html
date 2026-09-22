@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NDVI Map — FarmSaathi</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/farmer-theme.css" />
+  <style>
+    #ndvi-map { height: calc(100vh - 200px); min-height: 280px; width: 100%; }
+    .ndvi-panel {
+      position: fixed;
+      left: 12px;
+      bottom: 88px;
+      z-index: 800;
+      max-width: min(320px, 92vw);
+      padding: var(--space-2);
+      border-radius: var(--radius-lg);
+      font-size: 14px;
+    }
+    .layer-btns { display: flex; flex-wrap: wrap; gap: 6px; margin-top: var(--space-2); }
+  </style>
+  <link rel="stylesheet" href="css/visual-saas.css" />
+  <link rel="stylesheet" href="css/design-system-3d.css" />
+  <link rel="stylesheet" href="css/force-antigravity.css" />
+</head>
+<body>
+  <button class="theme-toggle-fab" aria-label="Toggle Theme">🌙</button>
+
+  <div class="page-container page-container--bleed">
+    <div class="page-title-bar section" style="padding-left: var(--space-3); padding-right: var(--space-3)">
+      <h1><span aria-hidden="true">🗺️</span> NDVI Map</h1>
+    </div>
+    <main>
+      <div id="ndvi-map"></div>
+      <div class="ndvi-panel glass-card" id="ndvi-panel">
+        <strong>🌿 NDVI</strong>
+        <div id="ndvi-info">Loading…</div>
+        <div class="layer-btns">
+          <button type="button" class="btn btn-secondary btn--sm" id="ly-road"><span>🗺️</span> Road</button>
+          <button type="button" class="btn btn-secondary btn--sm" id="ly-ndvi"><span>🛰️</span> NDVI</button>
+          <button type="button" class="btn btn-secondary btn--sm" id="ly-soil"><span>🌡️</span> Soil note</button>
+        </div>
+      </div>
+    </main>
+    <nav class="bottom-nav">
+      <a href="dashboard.html"><span class="ni">🏠</span><span data-i18n="bottom_home"></span></a>
+      <a href="ndvi-map.html" class="active"><span class="ni">🗺️</span><span>NDVI</span></a>
+      <a href="weather.html"><span class="ni">🌦️</span><span data-i18n="bottom_weather"></span></a>
+      <a href="profile.html"><span class="ni">👤</span><span data-i18n="bottom_profile"></span></a>
+    </nav>
+  </div>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="js/theme.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+    <script src="js/voice-assistant.js"></script>
+  <script src="js/ndvi-map.js"></script>
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  if (window.initNdviMap) {
+    console.log("✅ NDVI MAP STARTED");
+    window.initNdviMap();
+  } else {
+    console.error("❌ initNdviMap NOT FOUND");
+  }
+});
+</script>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      if (!(await guardRoutes())) return;
+      applyTranslations(document);
+      initNdviMap();
+    });
+  </script>
+  <script src="js/translations.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

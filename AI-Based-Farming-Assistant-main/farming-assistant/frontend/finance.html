@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="finance_hub">Finance</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/farmer-theme.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="css/visual-saas.css" />
+  <link rel="stylesheet" href="css/design-system-3d.css" />
+  <link rel="stylesheet" href="css/force-antigravity.css" />
+</head>
+<body>
+  <button class="theme-toggle-fab" aria-label="Toggle Theme">🌙</button>
+
+  <div class="page-container">
+    <header class="app-header">
+      <a href="dashboard.html" class="brand" style="color: inherit; text-decoration: none"><span class="logo">💰</span><span data-i18n="finance_hub"></span></a>
+      <button type="button" class="btn btn--icon icon-btn" data-lang-btn>🏳️</button>
+    </header>
+    <div class="page-title-bar section"><h1><span aria-hidden="true">💰</span> <span data-i18n="finance_hub">Finance</span></h1></div>
+    <main class="finance-cards page-main-tight section" style="max-width: 560px">
+      <a href="#profit"><div class="fin-card glass-card"><span class="e">💰</span><span class="t" data-i18n="calc_profit"></span></div></a>
+      <a href="#kcc"><div class="fin-card glass-card"><span class="e">🏦</span><span class="t" data-i18n="calc_kcc"></span></div></a>
+      <a href="subsidies.html"><div class="fin-card glass-card"><span class="e">🏛️</span><span class="t" data-i18n="calc_subsidy"></span></div></a>
+      <a href="#chart"><div class="fin-card glass-card"><span class="e">📊</span><span class="t" data-i18n="calc_input"></span></div></a>
+      <a href="mandi.html"><div class="fin-card glass-card"><span class="e">🛒</span><span class="t" data-i18n="calc_mandi"></span></div></a>
+      <section id="profit" class="glass-card section" style="margin-top: var(--space-3)">
+        <h2 data-i18n="calc_profit"></h2>
+        <label data-i18n="seed_cost"></label><input class="input-field" type="number" id="in-seed" value="5000" />
+        <label data-i18n="fert_cost"></label><input class="input-field" type="number" id="in-fert" value="8000" />
+        <label data-i18n="labour_cost"></label><input class="input-field" type="number" id="in-lab" value="4000" />
+        <label data-i18n="water_cost"></label><input class="input-field" type="number" id="in-water" value="2000" />
+        <label data-i18n="acres"></label><input class="input-field" type="number" id="in-acres" value="2" step="0.1" />
+        <label data-i18n="yield_q"></label><input class="input-field" type="number" id="in-yield" value="12" step="0.1" />
+        <label data-i18n="price_q"></label><input class="input-field" type="number" id="in-price" value="2200" />
+        <button type="button" class="btn btn-primary btn--block" style="margin-top: var(--space-2)" id="btn-profit"><span data-i18n="save"></span></button>
+        <div id="out-profit" style="margin-top: var(--space-2); font-size: 22px; font-weight: 800"></div>
+      </section>
+      <section id="kcc" class="glass-card section" style="margin-top: var(--space-3)">
+        <h2 data-i18n="calc_kcc"></h2>
+        <label data-i18n="loan_amt"></label><input class="input-field" type="number" id="in-loan" value="100000" />
+        <label data-i18n="interest_rate"></label><input class="input-field" type="number" id="in-rate" value="7" step="0.1" />
+        <label data-i18n="tenure_m"></label><input class="input-field" type="number" id="in-months" value="24" />
+        <button type="button" class="btn btn-primary btn--block" style="margin-top: var(--space-2)" id="btn-kcc"><span data-i18n="save"></span></button>
+        <div id="out-kcc" style="margin-top: var(--space-2); font-size: 22px; font-weight: 800"></div>
+        <a class="btn btn-primary btn--block" style="margin-top: var(--space-2)" href="https://www.rbi.org.in/" target="_blank" rel="noopener" data-i18n="apply_kcc"></a>
+      </section>
+      <section id="chart" class="glass-card section" style="margin-top: var(--space-3)">
+        <h2 data-i18n="calc_input"></h2>
+        <canvas id="break-even-chart" height="200"></canvas>
+      </section>
+    </main>
+    <nav class="bottom-nav">
+      <a href="dashboard.html"><span class="ni">🏠</span><span data-i18n="bottom_home"></span></a>
+      <a href="disease.html"><span class="ni">📸</span><span data-i18n="bottom_disease"></span></a>
+      <a href="weather.html"><span class="ni">🌦️</span><span data-i18n="bottom_weather"></span></a>
+      <a href="finance.html" class="active"><span class="ni">💰</span><span data-i18n="bottom_finance"></span></a>
+      <a href="profile.html"><span class="ni">👤</span><span data-i18n="bottom_profile"></span></a>
+    </nav>
+  </div>
+    <script src="js/theme.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+    <script src="js/voice-assistant.js"></script>
+  <script src="js/finance-calc.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      if (!(await guardRoutes())) return;
+      applyTranslations(document);
+      document.getElementById("btn-profit")?.addEventListener("click", () => {
+        const g = (id) => +document.getElementById(id).value;
+        const seed = g("in-seed");
+        const fert = g("in-fert");
+        const labour = g("in-lab");
+        const water = g("in-water");
+        const landAcres = g("in-acres");
+        const yieldQPerAcre = g("in-yield");
+        const pricePerQ = g("in-price");
+        if ([seed, fert, labour, water, landAcres, yieldQPerAcre, pricePerQ].some((n) => !Number.isFinite(n) || n < 0)) {
+          window.showToast?.("error", typeof t === "function" ? t("api_error") : "Check inputs");
+          return;
+        }
+        const o = calcProfit({
+          seed,
+          fert,
+          labour,
+          water,
+          landAcres,
+          yieldQPerAcre,
+          pricePerQ,
+        });
+        const el = document.getElementById("out-profit");
+        const col = o.profit >= 0 ? "#2E7D32" : "#C62828";
+        el.innerHTML =
+          "<span style=\"color:" +
+          col +
+          "\">" +
+          t("net_profit") +
+          ": ₹" +
+          Math.round(o.profit) +
+          "</span><br/>" +
+          t("total_cost") +
+          ": ₹" +
+          Math.round(o.totalCost) +
+          " · " +
+          t("expected_revenue") +
+          ": ₹" +
+          Math.round(o.revenue) +
+          "<br/>" +
+          t("per_acre") +
+          ": ₹" +
+          Math.round(o.perAcre) +
+          " · " +
+          t("breakeven") +
+          ": ₹" +
+          o.breakEvenQ.toFixed(1);
+        window.showToast?.("success", typeof t === "function" ? t("save") : "OK");
+      });
+      document.getElementById("btn-kcc")?.addEventListener("click", () => {
+        const loan = +document.getElementById("in-loan").value;
+        const rate = +document.getElementById("in-rate").value;
+        const months = +document.getElementById("in-months").value;
+        if (!Number.isFinite(loan) || loan <= 0 || !Number.isFinite(rate) || !Number.isFinite(months) || months <= 0) {
+          window.showToast?.("error", typeof t === "function" ? t("api_error") : "Check inputs");
+          return;
+        }
+        const o = calcEMI(loan, rate, months);
+        document.getElementById("out-kcc").innerHTML =
+          t("monthly_emi") +
+          ": ₹" +
+          o.emi.toFixed(0) +
+          "<br/>" +
+          t("total_interest") +
+          ": ₹" +
+          o.interest.toFixed(0);
+        window.showToast?.("success", typeof t === "function" ? t("save") : "OK");
+      });
+      const ctx = document.getElementById("break-even-chart");
+      if (ctx && window.Chart) {
+        const fixed = 19000;
+        const yld = 12;
+        const acres = 2;
+        const labels = [];
+        const data = [];
+        for (let p = 1500; p <= 3000; p += 50) {
+          labels.push(p);
+          data.push(yld * acres * p - fixed);
+        }
+        new Chart(ctx, {
+          type: "line",
+          data: {
+            labels,
+            datasets: [{ label: t("net_profit"), data, borderColor: "#2E7D32", fill: false }],
+          },
+          options: { scales: { y: { title: { display: true, text: "₹" } } } },
+        });
+      }
+    });
+  </script>
+  <script src="js/translations.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

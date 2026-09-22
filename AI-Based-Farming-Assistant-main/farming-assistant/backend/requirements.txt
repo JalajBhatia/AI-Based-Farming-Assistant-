@@ -1,0 +1,13 @@
+# TensorFlow: 2.15 has no wheels for newer Python (3.12+). Use 2.20+ on Windows.
+flask==3.0.0
+flask-cors==4.0.0
+PyMySQL==1.1.0
+bcrypt==4.1.2
+PyJWT==2.8.0
+python-dotenv==1.0.0
+requests==2.31.0
+groq>=0.11.0
+tensorflow>=2.20.0,<2.22
+Pillow>=10.2.0
+numpy>=1.26.0,<3
+gunicorn==21.2.0

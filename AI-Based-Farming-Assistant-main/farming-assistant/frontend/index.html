@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FarmSaathi</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/farmer-theme.css" />
+  <script>
+    (function () {
+      var t = localStorage.getItem("farmsaathi_token") || localStorage.getItem("farmerToken");
+      window.location.replace(t ? "dashboard.html" : "login.html");
+    })();
+  </script>
+  <link rel="stylesheet" href="css/visual-saas.css" />
+  <link rel="stylesheet" href="css/design-system-3d.css" />
+  <link rel="stylesheet" href="css/force-antigravity.css" />
+</head>
+<body>
+  <button class="theme-toggle-fab" aria-label="Toggle Theme">🌙</button>
+
+  <div class="page-container">
+    <section class="glass-card section" style="text-align: center; padding: var(--space-4) var(--space-3); margin-top: var(--space-4); position:relative; z-index:10;">
+      <img src="assets/logo.svg" width="96" height="96" alt="" style="filter: drop-shadow(0 10px 20px rgba(5,150,105,0.4)); margin-bottom: var(--space-2);" />
+      <h1 style="font-family: var(--font-display); margin: var(--space-2) 0; font-size: 2.5rem; letter-spacing: -0.05em;">FarmSaathi</h1>
+      <p class="muted-small" style="font-size: 16px; margin-bottom: var(--space-4)">Farmer's Digital Companion</p>
+      <div style="display: flex; flex-direction: column; gap: var(--space-2); max-width: 320px; margin: 0 auto;">
+        <a class="btn btn-primary btn--block" href="dashboard.html" style="min-height: 56px;">Get Started</a>
+        <a class="btn btn-secondary btn--block" href="login.html" style="min-height: 56px;">Login</a>
+      </div>
+    </section>
+  </div>
+  <script src="js/translations.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
