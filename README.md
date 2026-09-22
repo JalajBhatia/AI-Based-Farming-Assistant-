@@ -1,54 +1,162 @@
-# FarmSaathi — AI Farming Assistant
+# 🌱 AI-Based Farming Assistant
 
-Full-stack app for Indian farmers: Flask API + static frontend. **Auth:** username/password (bcrypt) + JWT (30 days). **Database:** MySQL (`farming_db`) via PyMySQL — tables are created on startup.
+An AI-powered full-stack farming assistant designed to help farmers with plant disease detection, crop recommendations, weather information, market prices, financial assistance, and voice-based interaction.
 
-## Prerequisites
+The system combines **Artificial Intelligence, Machine Learning, Flask, MySQL, HTML, CSS, and JavaScript** to provide useful farming-related information through a single web application.
 
-- Python 3.10+
-- MySQL Server (user must be able to create DB `farming_db` or it is auto-created)
-- API keys in `backend/.env` (OpenWeather, data.gov.in Agmarknet, Gemini, etc.)
+---
 
-## Backend setup
+## 🚀 Features
 
-```bash
-cd farming-assistant/backend
-pip install -r requirements.txt
-```
+### 🌿 Plant Disease Detection
+- Upload an image of a plant leaf.
+- AI-based model analyzes the image.
+- Provides the predicted plant disease.
+- Helps farmers identify potential crop diseases quickly.
 
-Ensure `backend/.env` exists (copy from your secure store; do **not** commit real secrets). MySQL variables:
+### 🤖 AI Farming Assistant
+- Provides farming-related assistance.
+- Answers agriculture-related questions.
+- Supports AI-powered recommendations.
+- Can work with demo/fallback responses when external services are unavailable.
 
-- `MYSQL_HOST`, `MYSQL_PORT`, `MYSQL_USER`, `MYSQL_PASS`, `MYSQL_DB`
+### 🎤 Voice Assistant
+- Voice-based interaction with the farming assistant.
+- Supports Hindi and English.
+- Uses browser Speech Recognition and Speech Synthesis APIs.
+- Users can speak questions instead of typing them.
 
-Start API:
+### 🌾 Crop Recommendations
+- Provides crop-related recommendations.
+- Uses farming and crop data stored in the backend.
+- Helps users make better crop-related decisions.
 
-```bash
-python app.py
-```
+### 🌦️ Weather Information
+- Provides weather-related information for farming.
+- Helps farmers understand weather conditions relevant to their crops.
 
-Default: `http://127.0.0.1:5000`.
+### 📊 Farm Dashboard
+- Dashboard for viewing farming information.
+- Displays crop health and farm-related data.
+- Includes data visualization using charts.
 
-### Optional Google login
+### 💰 Mandi / Market Prices
+- Provides agricultural market price information.
+- Helps farmers understand current crop market prices.
 
-Set `GOOGLE_CLIENT_ID` in `.env` and use Google Identity Services on the login page.
+### 💳 Financial Assistance
+- Provides information related to agricultural financial support and subsidies.
 
-### Disease model
+### 🦠 Disease and Pest Information
+- Provides information about common crop diseases and pests.
+- Includes prevention and management information.
 
-Place **`model.h5`** (or `plant_disease_model.h5`) under `backend/models/` with matching `class_names.json`. The app prefers `models/model.h5` if that file exists. You can also set `MODEL_FILE=myname.h5` or `MODEL_PATH=...` in `.env`. Without a model file, `/api/disease/predict` returns HTTP 503 with a Hindi message.
+### 🧑‍🌾 Farmer Profile
+- User profile management.
+- Stores farmer-related information used by different features of the application.
 
-## Frontend
+### 🎨 Multi-language Support
+- Frontend contains language-selection functionality.
+- Designed to make the application more accessible to farmers.
 
-Serve `farming-assistant/frontend/` with Live Server (e.g. port **5500**) or any static host. The client uses `http://127.0.0.1:5000` as API base when the page port is 5500, 8080, or 3000.
+### 🧪 Demo Mode
+- Provides fallback/demo functionality when required services are unavailable.
+- Useful for demonstrating the application without connecting all external services.
 
-**Main entry:** `login.html` → `profile-setup.html` (if incomplete) → `dashboard.html`. `index.html` redirects by auth state.
+---
 
-## Training (optional)
+## 🛠️ Technologies Used
 
-```bash
-pip install -r requirements_training.txt
-python tools/train_model.py
-```
+### Frontend
+- HTML5
+- CSS3
+- JavaScript
+- Chart.js
+- Browser Speech Recognition API
+- Browser Speech Synthesis API
 
-## Security
+### Backend
+- Python
+- Flask
+- REST APIs
+- MySQL
 
-- Keep `backend/.env` out of git (root `.gitignore` includes `.env`).
-- Rotate any API keys if they were exposed.
+### AI / Machine Learning
+- TensorFlow
+- CNN-based plant disease classification
+- Image processing
+- AI-powered farming assistance
+
+### Development Tools
+- VS Code
+- Git
+- GitHub
+
+---
+
+## 📂 Project Structure
+
+```text
+AI-Based-Farming-Assistant/
+│
+├── backend/
+│   ├── app.py
+│   ├── config.py
+│   ├── database.py
+│   ├── ai_client.py
+│   │
+│   ├── data/
+│   │   ├── crop_avg_yields.json
+│   │   ├── crop_calendars.json
+│   │   ├── disease_info.json
+│   │   ├── district_coords.json
+│   │   ├── pest_alerts.json
+│   │   └── subsidies.json
+│   │
+│   ├── models/
+│   │   └── class_names.json
+│   │
+│   ├── routes/
+│   │   ├── ai_advisor.py
+│   │   ├── assistant.py
+│   │   ├── auth.py
+│   │   ├── community.py
+│   │   ├── disease.py
+│   │   ├── farmer.py
+│   │   ├── finance.py
+│   │   ├── mandi.py
+│   │   ├── ndvi.py
+│   │   ├── profile.py
+│   │   ├── recommendation.py
+│   │   ├── soil.py
+│   │   ├── voice.py
+│   │   └── weather.py
+│   │
+│   ├── tools/
+│   │   └── train_model.py
+│   │
+│   ├── requirements.txt
+│   └── requirements_training.txt
+│
+├── frontend/
+│   ├── assets/
+│   ├── css/
+│   ├── js/
+│   ├── index.html
+│   ├── dashboard.html
+│   ├── disease.html
+│   ├── finance.html
+│   ├── mandi.html
+│   ├── ndvi-map.html
+│   ├── profile.html
+│   ├── recommendation.html
+│   ├── subsidies.html
+│   ├── voice.html
+│   └── weather.html
+│
+├── templates/
+│   └── voice.html
+│
+├── .gitignore
+├── README.md
+└── ...
